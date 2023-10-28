@@ -1,0 +1,8 @@
+.env
+venv/
+.idea/
+media/
+static/
+templates/
+**/migrations/**
+!**/migrations/__ini
