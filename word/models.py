@@ -20,7 +20,7 @@ class Word(models.Model):
     picture = models.ImageField(upload_to='images', verbose_name='عکس')
     video = models.FileField(upload_to='film', verbose_name='فیلم')
     pronunciation = models.CharField(max_length=50, verbose_name='تلفظ')
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL,null=True,blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL,null=True)
     slug = models.CharField(max_length=255, verbose_name='اسلاگ')
 
     def __str__(self):
