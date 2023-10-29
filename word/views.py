@@ -10,8 +10,7 @@ from rest_framework.viewsets import ModelViewSet
 from .models import Word, Category
 from .paginations import DefaultPagination
 from .permissions import IsAdminSuperUser
-from .serializers import WordSerializer, CategorySerializer, SimpleCategorySerializer, SimpleWordSerializer, \
-    VipWordSerializer
+from .serializers import WordSerializer, CategorySerializer, SimpleCategorySerializer, SimpleWordSerializer
 from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 
@@ -37,13 +36,3 @@ class CategoryViewSet(ModelViewSet):
     filterset_fields = ['parent']
 
 
-class ExamViewSet(ListModelMixin, GenericViewSet):
-    serializer_class = WordSerializer
-
-    def get_queryset(self):
-        return random.choices(Word.objects.all(), k=4)
-
-    def get_serializer_class(self):
-        if not self.request.user.is_vip:
-            return VipWordSerializer
-        return WordSerializer

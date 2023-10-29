@@ -28,7 +28,3 @@ class SimpleWordSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'category', 'picture', 'video', 'pronunciation', 'slug']
 
 
-class VipWordSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Word
-        fields = ['id', 'title', 'category', 'picture', 'pronunciation', 'slug']
