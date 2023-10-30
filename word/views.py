@@ -1,18 +1,17 @@
-import random
+from itertools import chain
+from operator import add
 
-from django_filters.rest_framework import DjangoFilterBackend
+from django.shortcuts import get_object_or_404
+from rest_framework import status
 from rest_framework.decorators import action
-from rest_framework.filters import SearchFilter
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from users.models import Interest
+from users.seializers import InterestSerializer
 from .models import Word, Category
-from .paginations import DefaultPagination
 from .permissions import IsAdminSuperUser
-from .serializers import WordSerializer, CategorySerializer, SimpleCategorySerializer, SimpleWordSerializer
-from rest_framework.mixins import ListModelMixin
-from rest_framework.viewsets import GenericViewSet
+from .serializers import WordSerializer, CategorySerializer, SimpleWordSerializer
 
 
 # Create your views here.
@@ -28,11 +27,22 @@ class WordViewSet(ModelViewSet):
             return WordSerializer
         return SimpleWordSerializer
 
+    @action(detail=True, methods=['POST'])
+    def add_to_word_interest(self, request, pk):
+        word = get_object_or_404(Word, pk=pk)
+        (favorite, created) = Interest.objects.get_or_create(user=self.request.user)
+        if word in favorite.word.all():
+            favorite.word.remove(word)
+            return Response('add to bookmark word no')
+        else:
+            favorite.word.add(word)
+            return Response('add to bookmark word yes')
+
+
+
 
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAdminSuperUser]
     filterset_fields = ['parent']
-
-

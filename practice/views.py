@@ -1,7 +1,9 @@
 import random
 
 from django.shortcuts import render
+from rest_framework import status
 from rest_framework.mixins import ListModelMixin
+from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 # from practice.filters import SentenceFilter
@@ -27,8 +29,9 @@ class SentenceViewSet(ListModelMixin, GenericViewSet):
     serializer_class = SentenceSerializer
 
     def get_queryset(self):
-        id = self.request.GET.get('id')
-        if id == None:
-            return Word.objects.all()
-        id = id.split(',')#There was an ID, come to separate and filter based on the ID of the word
-        return Word.objects.filter(pk__in=id)
+        try:
+            id = self.request.GET.get('id')
+            id = id.split(',')  # There was an ID, come to separate and filter based on the ID of the word
+            return Word.objects.filter(pk__in=id)
+        except  ValueError:
+            return []

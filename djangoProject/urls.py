@@ -24,5 +24,6 @@ urlpatterns = [
     path('auth/', include('rest_framework.urls')),
     path('kalameh/', include('word.urls')),
     path('practice/',include('practice.urls')),
+    path('karbar/',include('users.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

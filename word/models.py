@@ -43,3 +43,4 @@ class Word(models.Model):
     class Meta:
         verbose_name = 'کلمه'
         verbose_name_plural = 'کلمه ها'
+
