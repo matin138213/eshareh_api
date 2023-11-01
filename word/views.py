@@ -2,18 +2,17 @@ from itertools import chain
 from operator import add
 
 from django.shortcuts import get_object_or_404
-from rest_framework import status
+from rest_framework import status, views
 from rest_framework.decorators import action
+from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, ViewSet
 
 from users.models import Interest
 from users.seializers import InterestSerializer
 from .models import Word, Category
 from .permissions import IsAdminSuperUser
-from .serializers import WordSerializer, CategorySerializer, SimpleWordSerializer
-
-
+from .serializers import WordSerializer, CategorySerializer, SimpleWordSerializer,UploadSerializer
 # Create your views here.
 class WordViewSet(ModelViewSet):
     queryset = Word.objects.select_related('category').all()
@@ -37,8 +36,6 @@ class WordViewSet(ModelViewSet):
         else:
             favorite.word.add(word)
             return Response('add to bookmark word yes')
-
-
 
 
 class CategoryViewSet(ModelViewSet):

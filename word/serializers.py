@@ -1,4 +1,7 @@
+
 from rest_framework import serializers
+from rest_framework.serializers import Serializer, FileField
+
 from .models import Word, Category
 
 
@@ -28,3 +31,8 @@ class SimpleWordSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'category', 'picture', 'video', 'pronunciation', 'slug']
 
 
+class UploadSerializer(Serializer):
+    file_uploaded = FileField()
+
+    class Meta:
+        fields = ['video', 'picture']
