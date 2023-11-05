@@ -12,7 +12,9 @@ from users.models import Interest
 from users.seializers import InterestSerializer
 from .models import Word, Category
 from .permissions import IsAdminSuperUser
-from .serializers import WordSerializer, CategorySerializer, SimpleWordSerializer,UploadSerializer
+from .serializers import WordSerializer, CategorySerializer, SimpleWordSerializer
+
+
 # Create your views here.
 class WordViewSet(ModelViewSet):
     queryset = Word.objects.select_related('category').all()

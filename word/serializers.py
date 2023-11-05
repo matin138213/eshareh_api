@@ -31,8 +31,3 @@ class SimpleWordSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'category', 'picture', 'video', 'pronunciation', 'slug']
 
 
-class UploadSerializer(Serializer):
-    file_uploaded = FileField()
-
-    class Meta:
-        fields = ['video', 'picture']

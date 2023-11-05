@@ -33,5 +33,5 @@ class SentenceViewSet(ListModelMixin, GenericViewSet):
             id = self.request.GET.get('id')
             id = id.split(',')  # There was an ID, come to separate and filter based on the ID of the word
             return Word.objects.filter(pk__in=id)
-        except  ValueError:
+        except Exception:
             return []

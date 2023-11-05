@@ -15,7 +15,7 @@ from .seializers import UserSerializer, InterestSerializer
 
 
 # Create your views here.
-class UserlViewSet(ModelViewSet):
+class UserViewSet(ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAdminSuperUser]
@@ -33,7 +33,7 @@ class UserlViewSet(ModelViewSet):
             return Response(serializer.data)
 
 
-@action(detail=False, methods=['GET'], permission_classes=[IsAuthenticated])
+
 class InterestViewSet(ListModelMixin, GenericViewSet):
     queryset = Interest.objects.all()
     serializer_class = InterestSerializer
