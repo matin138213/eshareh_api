@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'word',
     'users',
     'practice',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -142,4 +143,15 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend',
                                 'rest_framework.filters.SearchFilter']
+}
+CELERY_BROKER_URL = 'redis://localhost:6379/2'
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "TIMOUT": 2 * 60,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
 }
