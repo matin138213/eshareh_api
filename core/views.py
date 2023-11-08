@@ -1,5 +1,6 @@
 from rest_framework import status
 from rest_framework.generics import CreateAPIView
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from django.core.cache import cache
 from core.seializers import UserPhoneNumber, LoginSerializer
@@ -12,6 +13,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
 class UserPhoneNumbers(CreateAPIView):
     serializer_class = UserPhoneNumber
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -28,6 +30,7 @@ class UserPhoneNumbers(CreateAPIView):
 
 class Login(CreateAPIView):
     serializer_class = LoginSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
