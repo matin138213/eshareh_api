@@ -26,7 +26,7 @@ class LoginSerializer(serializers.Serializer):
     def validate(self, data):
         if not CustomUser.objects.filter(username=data['phone_number']).exists():
             raise serializers.ValidationError("شماره تلفن شما اشتباه است!")
-        elif cache.get(data['phone_number']) != data['code']:
+        if cache.get(data['phone_number']) != data['code']:
             raise serializers.ValidationError("کد اشتباه است")
 
         return data
