@@ -23,7 +23,7 @@ class UserPhoneNumbers(CreateAPIView):
         code = random.randint(1000, 9999)
         print(code)
         cache.set(phone_number,code , timeout=60 * 2)
-        # send_sms.delay(to=phone_number, token=1234)
+        send_sms.delay(to=phone_number, token=1234)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 

@@ -5,4 +5,4 @@ media/
 static/
 templates/
 **/migrations/**
-!**/migrations/__ini
+!**/migrations/__init__.py
