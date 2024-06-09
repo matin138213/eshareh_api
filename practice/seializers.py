@@ -22,3 +22,8 @@ class SentenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Word
         fields = ['id', 'video']
+class VipWordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Word
+        fields = ['id', 'title', 'category', 'picture', 'pronunciation', 'slug']
+
